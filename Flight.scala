@@ -3,7 +3,7 @@ object Status extends Enumeration{
     val Leaving, Arriving, Staying, Left = Value
 }
 
-import Direction._
+import Direct.Direction._
 
 import Status._
 
@@ -63,6 +63,9 @@ class Flight(private val direction: Direction, private val in_out: InOut, privat
     def getDate(): Data = data
     def getHour(): Hour = hour
     def res_places(n: Int): Unit ={
+        if(n > places){
+            throw new IllegalArgumentException("There is not enough places")
+        }
         places -= n
     }
     def getPlacesNumber(): Int = places
@@ -73,7 +76,7 @@ class Flight(private val direction: Direction, private val in_out: InOut, privat
 object Appl {
   def main(agrs: Array[String]) {
     val data = new Data(1997, 12, 14)
-    val direction = Direction.London
+    val direction = London
     val inOut = Status.Arriving
     val hour = new Hour(23,57)
     val newFlight = new Flight(direction,inOut,20,data,hour,0.3,5,54.43)
