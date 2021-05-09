@@ -1,8 +1,3 @@
-object Direction extends Enumeration {
-    type Direction = Value
-    val London, Madrit, Barcelona = Value
-}
-
 object Status extends Enumeration{
     type InOut = Value
     val Leaving, Arriving, Staying, Left = Value
