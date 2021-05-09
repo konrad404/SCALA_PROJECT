@@ -48,7 +48,7 @@ class Hour(private var hour: Int, private var minute: Int){
 class InvalidProbabilityException(s:String) extends Exception(s){}  
 
 
-class Flight(private val direction: Direction, private val in_out: InOut, private val places: Int, private val data: Data,
+class Flight(private val direction: Direction, private val in_out: InOut, private var places: Int, private val data: Data,
  private val hour: Hour, private val changeTimeProb: Double, private val runway: Int, private val price: Double){
     if(places <= 0){
         throw new IllegalArgumentException
@@ -62,6 +62,9 @@ class Flight(private val direction: Direction, private val in_out: InOut, privat
     def isLeaving(): Boolean  = (in_out == Status.Leaving)
     def getDate(): Data = data
     def getHour(): Hour = hour
+    def res_places(n: Int): Unit ={
+        places -= n
+    }
     def getPlacesNumber(): Int = places
     def getDirection(): Direction = direction;
 }
