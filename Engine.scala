@@ -1,12 +1,15 @@
 import Flight._
 import Customer._
 import Enums._
+import Observer._
 
 package Engine{
 
 class Engine(){
     private var timetableLength = 20
-    private val flightGenerator = FlightGenerator()
+    private val observer: Observer = Observer(this)
+    private val flightGenerator = FlightGenerator(observer)
+    
     private var flights : Array[Flight] = flightGenerator.generateTimetable(timetableLength) // to się wygeneruje
 
     def getFlights():Array[Flight]={this.flights}

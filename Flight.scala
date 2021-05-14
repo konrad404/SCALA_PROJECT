@@ -7,14 +7,13 @@ package Flight{
     import java.util.Date
     import scala.util.Random
     import scala.math.BigDecimal
-
-
+    import Observer._
 
     class InvalidProbabilityException(s:String) extends Exception(s){}  
 
 
     class Flight(private val direction: Direction.Value, private val status: Status.Value, private var freePlaces: Int, private val date: Date,
-     private val changeTimeProb: Double, private val runway: Runaways.Value, private val price: Double){
+     private val changeTimeProb: Double, private val runway: Runaways.Value, private val price: Double, private val observer: Observer){
         if(freePlaces <= 0){
             throw new IllegalArgumentException
         }
@@ -39,6 +38,7 @@ package Flight{
             freePlaces -= n
         }
         def getFreePlacesNumber(): Int = freePlaces
+        def getTakenPlaces(): Int = places - freePlaces
         def getDirection(): Direction.Direction = direction    
         def getProbability(): Double = changeTimeProb
         def getStatus(): Status.Status = status
@@ -56,7 +56,7 @@ package Flight{
         }
     }
 
-    class FlightGenerator(){
+    class FlightGenerator(observer: Observer){
         val minPrice = 50
         val priceBracket = 300
         def generateFlight(): Flight = {
@@ -71,7 +71,7 @@ package Flight{
             val inOut = Status(Random.nextInt(2))
             val runaway = Runaways(Random.nextInt(Runaways.maxId))
             val price = (minPrice + Random.nextInt(priceBracket)).toDouble
-            new Flight(direction,inOut,places,data,probability,runaway,price)
+            new Flight(direction,inOut,places,data,probability,runaway,price, observer)
         }
         
         def generateTimetable(amount:  Int): Array[Flight] = {
@@ -84,6 +84,6 @@ package Flight{
     }
 
     object FlightGenerator {
-        def apply() = new FlightGenerator
+        def apply(observer: Observer) = new FlightGenerator(observer)
     }
 }
