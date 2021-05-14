@@ -34,16 +34,7 @@ class Customer(private val name: String, private val countries: Array[Direction.
     }
      
 }
-    
-object ApplCust {
-    def main(agrs: Array[String]):Unit={
-        val e = new Engine()
-        val dirs : Array[Direction.Value] = Array(Direction.London)
-        val range : Array[Double] = Array(100.0, 200.0)
-        val cust = new Customer("Roman", dirs, 1, 3, range, TripReason.Work, e)
-        cust.bookFlight()
-    }
-}
+
 
 }
 
