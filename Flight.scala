@@ -12,9 +12,6 @@ package Flight{
         val Leaving, Arriving, Staying, Left = Value
     }
 
-
-    // import Status
-
     class DateFun(){
         // var c = Calendar()
         def getDate(): Date = {
@@ -22,40 +19,6 @@ package Flight{
         }
 
     }
-
-    // class Hour(private var hour: Int, private var minute: Int){
-    //     override def toString(): String = {
-    //         var h = {
-    //             if(hour < 10)
-    //             "0" + hour
-    //             else
-    //             "" + hour
-    //         }
-    //         var m = {
-    //             if(minute < 10)
-    //             "0" + minute
-    //             else
-    //             "" + minute
-    //         }
-    //         h + ":" + m
-    //     }
-    //     def increase(bonusHour: Int, bonusMinute: Int): Int = {
-    //         var bHour = bonusHour
-    //         minute += bonusMinute
-    //         if(minute >= 60){
-    //             minute %= 60
-    //             bHour +=1
-    //         }
-    //         hour += bHour
-    //         if(hour >= 24){
-    //             hour %= 24
-    //             1
-    //         }
-    //         else{
-    //             0
-    //         }
-    //     }
-    // }
 
     class InvalidProbabilityException(s:String) extends Exception(s){}  
 
@@ -70,7 +33,7 @@ package Flight{
         }
         val toAdd = 200
 
-        private val firstClassPrice = price + toAdd
+        private val firstClassPrice : Double  = price + toAdd
         private val places = freePlaces
 
         def getPrice(): Double = price
@@ -121,7 +84,6 @@ package Flight{
             }
             timetable
         }
-
     }
 
     object FlightGenerator {
