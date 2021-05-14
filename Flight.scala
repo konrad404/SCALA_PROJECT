@@ -88,7 +88,7 @@ package Flight{
         def getDirection(): Direction.Direction = direction    
         def getProbability(): Double = changeTimeProb
         override def toString() = {
-            "Direction: " + direction + ", date: " + date + ", status: " + status + ", places: " + places + ", free: " + freePlaces + ", price:" + price + ", first class price: " + firstClassPrice
+            "Direction: " + direction + ", date: " + date + ", status: " + status + ", places: " + places + ", free: " + freePlaces + ", price:" + price + "0, first class price: " + firstClassPrice + "0"
         }
     }
 
@@ -114,8 +114,12 @@ package Flight{
             new Flight(direction,inOut,places,data,probability,runaway,price)
         }
         
-        def generateTimetable(amount:  Int){
-            
+        def generateTimetable(amount:  Int): Array[Flight] = {
+            var timetable : Array[Flight] = Array()
+            for(i <- 1 to amount){
+                timetable = timetable :+ generateFlight()
+            }
+            timetable
         }
 
     }
