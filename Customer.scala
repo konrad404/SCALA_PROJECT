@@ -3,12 +3,15 @@ import Enums.TripReason
 import Enums.Status
 import Engine._
 import Flight._
+import scala.util.Random
 
 package Customer{
 class Customer(private val name: String, private val countries: Array[Direction.Value], private var numberOfCustomers: Int,
     private var daysInAdvance: Int, private val priceRange: Array[Double], private val tripReason: TripReason.Value, private val engine: Engine){
 
-    private val bookedFlights : Array[Flight] = Array()
+    private val bookedFlights : Array[Int] = Array()
+
+    val rand = new scala.util.Random
 
     def bookFlight():Unit={
         var flights : Array[Flight] = this.engine.getFlights()
@@ -21,9 +24,16 @@ class Customer(private val name: String, private val countries: Array[Direction.
         println("===============================================================================\n [FILTERED FLIGHTS]")
         for(f <- flights)
             println(f.toString())
+        
+        val selectedFlight = flights(rand.nextInt(flights.size))
+        println("===============================================================================\n [SELECTED FLIGHT]")
+        println(selectedFlight.toString())
+        selectedFlight.getId() +: bookedFlights
+
+        engine.reservePlaces(selectedFlight.getId(), numberOfCustomers)
     }
      
-} 
+}
     
 object ApplCust {
     def main(agrs: Array[String]):Unit={

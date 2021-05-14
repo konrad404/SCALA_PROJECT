@@ -20,5 +20,9 @@ class Engine(){
     def work(): Unit = {
 
     }
+
+    def reservePlaces(flightId: Int, numberOfCustomers: Int) : Unit = {
+        flights(flightId-1).res_places(numberOfCustomers)
+    }
 }
 }

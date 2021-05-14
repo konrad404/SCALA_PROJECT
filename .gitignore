@@ -6,3 +6,4 @@
 .metals/readonly/scala/Predef.scala
 .metals/readonly/scala/Array.scala
 ex.scala
+.metals/readonly/scala/util/Random.scala
