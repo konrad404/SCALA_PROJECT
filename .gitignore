@@ -3,3 +3,6 @@
 .metals/metals.log
 .metals/metals.lock.db
 .metals/metals.h2.db
+.metals/readonly/scala/Predef.scala
+.metals/readonly/scala/Array.scala
+ex.scala
