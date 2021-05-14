@@ -5,7 +5,8 @@ import Enums._
 package Engine{
 
 class Engine(){
-    private var flights : Array[Flight] = Array() // to się wygeneruje
+    val flightGenerator = FlightGenerator()
+    private var flights : Array[Flight] = flightGenerator.generateTimetable(20) // to się wygeneruje
 
     def getFlights():Array[Flight]={this.flights}
 }
