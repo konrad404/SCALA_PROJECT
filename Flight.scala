@@ -51,7 +51,7 @@ package Flight{
         def getDirection(): Direction.Direction = direction    
         def getProbability(): Double = changeTimeProb
         override def toString() = {
-            "Direction: " + direction + ", date: " + date + ", status: " + status + ", places: " + places + ", free: " + freePlaces + ", price:" + price + "0, first class price: " + firstClassPrice + "0"
+            "Direction: " + direction + ",\t date: " + date + ",\t status: " + status + ",\t places: " + places + ",\t free: " + freePlaces + ",\t price:" + price + "0,\t first class price: " + firstClassPrice + "0"
         }
     }
 
@@ -63,11 +63,11 @@ package Flight{
             var time = today.getTime()
             var seed: Long = scala.math.pow(10,10).toLong
             var toAdd = Random.nextLong(seed)
-            println(toAdd) 
+            // println(toAdd) 
             val data = new Date(time + toAdd)
-            for( i <- Sizes.values){
-                println(i)
-            }
+            // for( i <- Sizes.values){
+            //     println(i)
+            // }
             val places = Sizes(Random.nextInt(Sizes.maxId)).toString().toInt
             val probability = Random.nextDouble()
             val direction = Direction(Random.nextInt(Direction.maxId))
