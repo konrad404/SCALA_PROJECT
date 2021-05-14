@@ -1,1 +1,5 @@
 *.class
+.vscode/settings.json
+.metals/metals.log
+.metals/metals.lock.db
+.metals/metals.h2.db
