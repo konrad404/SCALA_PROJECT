@@ -12,7 +12,7 @@ class Engine(){
     def getFlights():Array[Flight]={this.flights}
 
     def showTimetable(): Unit = {
-        for(i:Int <- 1 to timetableLength -1){
+        for(i:Int <- 0 to timetableLength -1){
             println(flights(i))
         }
     }

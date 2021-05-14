@@ -33,6 +33,7 @@ package Flight{
 
         private val firstClassPrice : Double  = price + toAdd
         private val places = freePlaces
+        private val id = Flight.getNewId()
 
         def getPrice(): Double = price
         def getFirstClassPrice(): Double = firstClassPrice
@@ -49,8 +50,17 @@ package Flight{
         def getDirection(): Direction.Direction = direction    
         def getProbability(): Double = changeTimeProb
         def getStatus(): Status.Status = status
+        def getId(): Int = id
         override def toString() = {
-            "Direction: " + direction + "\t date: " + date + "\t status: " + status + "\t places: " + places + "\t free: " + freePlaces + "\t price:" + price + "0\t first class price: " + firstClassPrice + "0"
+            "ID: " + id + "\t Direction: " + direction + "\t date: " + date + "\t status: " + status + "\t places: " + places + "\t free: " + freePlaces + "\t price:" + price + "0\t first class price: " + firstClassPrice + "0"
+        }
+    }
+
+    object Flight{
+        var highestId = 0
+        def getNewId(): Int = {
+            highestId += 1
+            highestId
         }
     }
 
