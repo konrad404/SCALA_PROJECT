@@ -8,15 +8,7 @@ package Flight{
     import scala.util.Random
     import scala.math.BigDecimal
 
-    
 
-    class DateFun(){
-        // var c = Calendar()
-        def getDate(): Date = {
-            Calendar.getInstance().getTime()
-        }
-
-    }
 
     class InvalidProbabilityException(s:String) extends Exception(s){}  
 
@@ -72,11 +64,7 @@ package Flight{
             var time = today.getTime()
             var seed: Long = scala.math.pow(10,10).toLong
             var toAdd = Random.nextLong(seed)
-            // println(toAdd) 
             val data = new Date(time + toAdd)
-            // for( i <- Sizes.values){
-            //     println(i)
-            // }
             val places = Sizes(Random.nextInt(Sizes.maxId)).toString().toInt
             val probability = Random.nextDouble()
             val direction = Direction(Random.nextInt(Direction.maxId))
@@ -98,37 +86,4 @@ package Flight{
     object FlightGenerator {
         def apply() = new FlightGenerator
     }
-
-
-    // object ApplFlight {
-    //     def main(agrs: Array[String]) {
-    //         val data = new Date(1997, 12, 14)
-    //         // println(data.howFarAway())
-    //         val direction = London
-    //         val inOut = Status.Arriving
-    //         val newFlight = new Flight(direction,inOut,20,data,0.3,5,54.43)
-    //         println(newFlight.getPrice())
-    //         println(newFlight.isArriving())  
-    //         println(newFlight.isLeaving())
-    //         println(newFlight.getDate())
-    //         println(newFlight.getPlacesNumber())
-    //         println(newFlight.getDirection())
-    //     }
-    // }
 }
-
-
-
-// cel
-// przylot/wylot
-// liczba miejsc
-// termin
-// prawdopodobieństwo przełożenia/odwołania
-// pas
-// ceny
-
-
-// przylot
-// odlot
-// opóźnij
-// odwołaj
