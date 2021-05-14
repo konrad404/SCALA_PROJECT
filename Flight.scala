@@ -2,15 +2,13 @@ package Flight{
     import Enums.Direction
     import Enums.Sizes
     import Enums.Runaways
+    import Enums.Status
     import java.util.Calendar
     import java.util.Date
     import scala.util.Random
     import scala.math.BigDecimal
 
-    object Status extends Enumeration{
-        type Status = Value
-        val Leaving, Arriving, Staying, Left = Value
-    }
+    
 
     class DateFun(){
         // var c = Calendar()
@@ -50,8 +48,9 @@ package Flight{
         def getFreePlacesNumber(): Int = freePlaces
         def getDirection(): Direction.Direction = direction    
         def getProbability(): Double = changeTimeProb
+        def getStatus(): Status.Status = status
         override def toString() = {
-            "Direction: " + direction + ",\t date: " + date + ",\t status: " + status + ",\t places: " + places + ",\t free: " + freePlaces + ",\t price:" + price + "0,\t first class price: " + firstClassPrice + "0"
+            "Direction: " + direction + "\t date: " + date + "\t status: " + status + "\t places: " + places + "\t free: " + freePlaces + "\t price:" + price + "0\t first class price: " + firstClassPrice + "0"
         }
     }
 

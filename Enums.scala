@@ -18,4 +18,8 @@ object Runaways extends Enumeration {
     type Runaways = Value
     val One, Two, Three, Four, Five, Six, Seven, Eight = Value
 }
+object Status extends Enumeration{
+        type Status = Value
+        val Leaving, Arriving, Staying, Left = Value
+}
 }
