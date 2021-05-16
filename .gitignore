@@ -7,3 +7,5 @@
 .metals/readonly/scala/Array.scala
 ex.scala
 .metals/readonly/scala/util/Random.scala
+.metals/readonly/scala/collection/immutable/Range.scala
+.metals/readonly/scala/Double.scala
