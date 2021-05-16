@@ -15,7 +15,7 @@ class Engine(){
     
     //ja to bym dał jako osobne metody zapisujące do tych varów, a nie że się wywołują przy tworzeniu engina
     private var flights : Array[Flight] = flightGenerator.generateTimetable(timetableLength)
-    private var customers : List[Customer] = generateCustomers(timetableLength)
+    private var customers : List[Customer] = customerGenerator.generateCustomers(timetableLength)
 
 
     def getFlights():Array[Flight]={this.flights}
@@ -36,11 +36,5 @@ class Engine(){
 
     def getDate(): Date = currentTime
 
-    def generateCustomers(numberOfCustomers: Int): List[Customer] ={
-        var newCustomers : List[Customer] = List()
-        for( _ <- 0 to numberOfCustomers)
-            customerGenerator.generateCustomer() +: newCustomers
-        newCustomers 
-    }
 }
 }

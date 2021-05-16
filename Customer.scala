@@ -74,6 +74,13 @@ class Customer(private val name: String, private val countries: scala.collection
             val tripReason = TripReason(Random.nextInt(TripReason.maxId))
             new Customer(name, directions, numberOfCustomers, daysInAdvance, priceRange, tripReason, engine)
         }
+
+        def generateCustomers(numberOfCustomers: Int): List[Customer] ={
+            var newCustomers : List[Customer] = List()
+            for( _ <- 0 to numberOfCustomers)
+                generateCustomer() +: newCustomers
+            newCustomers 
+        }
     }
 
     class NameGenerator(){
