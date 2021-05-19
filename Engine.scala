@@ -36,5 +36,9 @@ class Engine(){
 
     def getDate(): Date = currentTime
 
+    def getStatisticsFromDay(day: Date){
+        observer.getStatisticsFromDay(day)
+    }
+
 }
 }

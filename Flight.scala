@@ -46,6 +46,8 @@ package Flight{
         override def toString() = {
             "ID: " + id + "\t Direction: " + direction + "\t date: " + date + "\t status: " + status + "\t places: " + places + "\t free: " + freePlaces + "\t price:" + price + "0\t first class price: " + firstClassPrice + "0"
         }
+
+        
     }
 
     object Flight{
