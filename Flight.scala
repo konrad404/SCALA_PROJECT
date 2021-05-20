@@ -23,7 +23,10 @@ package Flight{
         val toAdd = 200
 
         private val firstClassPrice : Double  = price + toAdd
-        private val places = freePlaces
+        // private val places = freePlaces
+        private var takenPlaces = 0
+        private var takenBusinessPlaces = 0
+
         private val id = Flight.getNewId()
 
         def getPrice(): Double = price
@@ -31,11 +34,17 @@ package Flight{
         def isArriving(): Boolean  = (status == Status.Arriving)
         def isLeaving(): Boolean  = (status == Status.Leaving)
         def getDate(): Date = date
-        def res_places(n: Int): Unit ={
+        def res_places(n: Int, isBusiness: Boolean): Unit ={
             if(n > freePlaces){
                 throw new IllegalArgumentException("There is not enough places")
             }
             freePlaces -= n
+            if(isBusiness){
+                takenBusinessPlaces += n
+            }
+            else {
+                takenPlaces +=n
+            }
         }
         def getFreePlacesNumber(): Int = freePlaces
         def getTakenPlaces(): Int = places - freePlaces
