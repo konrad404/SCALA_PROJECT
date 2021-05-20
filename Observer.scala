@@ -27,7 +27,8 @@ package Observer{
         // val runaway = Runaways(Random.nextInt(Runaways.maxId))
         // val price = (20 + Random.nextInt(20)).toDouble
         // val flight1 =  new Flight(direction,inOut,places,today,probability,runaway,price, this)
-
+        // flight1.res_places(5,true)
+        // flight1.res_places(10,false)
         // flightTookPlaace(flight1)
 
         def flightTookPlaace(flight: Flight) : Unit = {
@@ -35,7 +36,7 @@ package Observer{
             flightsNumber += 1
         }
 
-        def getStatisticsFromDay(day: Date): Unit = {
+        def getStatisticsFromDay(day: Date) : String = {
             var todaysFlights: Array[Flight] = Array()
             for(flight <- pastFlights){
                 if (day.getDate() == flight.getDate().getDate() && day.getMonth() == flight.getDate().getMonth() && day.getYear() == flight.getDate().getYear()){
@@ -51,7 +52,9 @@ package Observer{
                 places += flight.getTakenPlaces()
                 income += flight.getCurrIncome()
             }
-            println("Flights on day: "+  day.getYear()+ day.getMonth()+ day.getDate()+ " : "+  count+ " clients number: "+ places+ " income: "+ income, "0")
+            val res: String = "Flights on day: "+  (day.getYear()+ 1900) + ".0" +  (day.getMonth() + 1) + "." + day.getDate()+ " : "+  count+ " clients number: "+ places+ " income: "+ income + "0"
+            println(res)
+            res
         }
         
     }

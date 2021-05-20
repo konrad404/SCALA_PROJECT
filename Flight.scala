@@ -12,9 +12,9 @@ package Flight{
     class InvalidProbabilityException(s:String) extends Exception(s){}  
 
 
-    class Flight(private val direction: Direction.Value, private val status: Status.Value, private var freePlaces: Int, private val date: Date,
+    class Flight(private val direction: Direction.Value, private val status: Status.Value, private var places: Int, private val date: Date,
      private val changeTimeProb: Double, private val runway: Runaways.Value, private val price: Double, private val observer: Observer){
-        if(freePlaces <= 0){
+        if(places <= 0){
             throw new IllegalArgumentException
         }
         if(changeTimeProb > 1 || changeTimeProb < 0){
@@ -23,9 +23,14 @@ package Flight{
         val toAdd = 200
 
         private val firstClassPrice : Double  = price + toAdd
-        private val places = freePlaces
+        private var freePlaces = (places * 0.7).toInt
+        private var freeBusinessPlaces = places - freePlaces 
         private var takenPlaces = 0
         private var takenBusinessPlaces = 0
+
+        // println(places, freeBusinessPlaces, freePlaces)
+
+
 
         private val id = Flight.getNewId()
 
@@ -35,18 +40,37 @@ package Flight{
         def isLeaving(): Boolean  = (status == Status.Leaving)
         def getDate(): Date = date
         def res_places(n: Int, isBusiness: Boolean): Unit ={
-            if(n > freePlaces){
-                throw new IllegalArgumentException("There is not enough places")
-            }
-            freePlaces -= n
+            // if(n > freePlaces){
+            //     throw new IllegalArgumentException("There is not enough places")
+            // }
+            // freePlaces -= n
             if(isBusiness){
-                takenBusinessPlaces += n
+                if(n > freeBusinessPlaces){
+                    throw new IllegalArgumentException("There is not enough places")
+                }
+                else{
+                    takenBusinessPlaces += n
+                    freeBusinessPlaces -= n
+                }
             }
             else {
-                takenPlaces +=n
+                if(n > freePlaces){
+                    throw new IllegalArgumentException("There is not enough places")
+                }
+                else{
+                    takenPlaces += n
+                    freePlaces -= n
+                }
             }
         }
-        def getFreePlacesNumber(): Int = freePlaces
+
+        def fly(): Unit = {
+            observer.flightTookPlaace(this)
+        }
+
+        def getFreePlacesNumber(): Int = freePlaces + freeBusinessPlaces
+        def getFreeEconomicPlacesNumber(): Int = freePlaces
+        def getFreeBusinessPlacesNumber(): Int = freeBusinessPlaces
         def getCurrIncome(): Double = takenPlaces * price + takenBusinessPlaces * firstClassPrice
         def getTakenPlaces(): Int = takenPlaces + takenBusinessPlaces
         def getDirection(): Direction.Direction = direction    
@@ -54,7 +78,7 @@ package Flight{
         def getStatus(): Status.Status = status
         def getId(): Int = id
         override def toString() = {
-            "ID: " + id + "\t Direction: " + direction + "\t date: " + date + "\t status: " + status + "\t places: " + places + "\t free: " + freePlaces + "\t price:" + price + "0\t first class price: " + firstClassPrice + "0"
+            "ID: " + id + "\t Direction: " + direction + "\t date: " + date + "\t status: " + status + "\t places: " + places + "\t free: " + (freePlaces + freeBusinessPlaces) + "\t price:" + price + "0\t first class price: " + firstClassPrice + "0"
         }
 
         

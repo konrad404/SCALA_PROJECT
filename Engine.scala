@@ -26,8 +26,19 @@ class Engine(){
         }
     }
 
-    def work(): Unit = {
-
+    def work(days: Int): Unit = {
+        var date = new Date()
+        for(day <- 1 to days){
+            date = new Date(date.getTime() + 86400000)
+            for(flight <- flights){
+                if(date.getDate() == flight.getDate().getDate() && date.getMonth() == flight.getDate().getMonth() && date.getYear() == flight.getDate().getYear()){
+                    flight.fly()
+                }
+            }
+            // println(date)
+            observer.getStatisticsFromDay(date)
+        }
+        
     }
 
     def reservePlaces(flightId: Int, numberOfCustomers: Int, isBusiness: Boolean) : Unit = {
@@ -36,7 +47,7 @@ class Engine(){
 
     def getDate(): Date = currentTime
 
-    def getStatisticsFromDay(day: Date){
+    def getStatisticsFromDay(day: Date): String = {
         observer.getStatisticsFromDay(day)
     }
 
