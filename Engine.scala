@@ -30,8 +30,8 @@ class Engine(){
 
     }
 
-    def reservePlaces(flightId: Int, numberOfCustomers: Int) : Unit = {
-        flights(flightId-1).res_places(numberOfCustomers)
+    def reservePlaces(flightId: Int, numberOfCustomers: Int, isBusiness: Boolean) : Unit = {
+        flights(flightId-1).res_places(numberOfCustomers, isBusiness)
     }
 
     def getDate(): Date = currentTime

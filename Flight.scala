@@ -23,7 +23,7 @@ package Flight{
         val toAdd = 200
 
         private val firstClassPrice : Double  = price + toAdd
-        // private val places = freePlaces
+        private val places = freePlaces
         private var takenPlaces = 0
         private var takenBusinessPlaces = 0
 
@@ -47,7 +47,8 @@ package Flight{
             }
         }
         def getFreePlacesNumber(): Int = freePlaces
-        def getTakenPlaces(): Int = places - freePlaces
+        def getCurrIncome(): Double = takenPlaces * price + takenBusinessPlaces * firstClassPrice
+        def getTakenPlaces(): Int = takenPlaces + takenBusinessPlaces
         def getDirection(): Direction.Direction = direction    
         def getProbability(): Double = changeTimeProb
         def getStatus(): Status.Status = status
