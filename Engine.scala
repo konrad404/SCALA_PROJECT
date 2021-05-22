@@ -14,7 +14,7 @@ class Engine(){
     private var date = new Date()
     
     private var flights : Array[Flight] = flightGenerator.generateTimetable(timetableLength)
-    // private var customers : List[Customer]
+    private var customers : List[Customer] = List()
 
 
     def getFlights():Array[Flight]={this.flights}
@@ -37,9 +37,9 @@ class Engine(){
         // var date = new Date()
 
         //generate customers, each of them books a flight
-        // customers = customerGenerator.generateCustomers(100)
-        // for(customer <- customer)
-        //     customer.bookFlight(null, null)
+         customers = customerGenerator.generateCustomers(100)
+         for(customer <- customers)
+             customer.bookFlight(null, null)
 
         for(day <- 1 to days){
             date = new Date(date.getTime() + 86400000)
