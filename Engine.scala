@@ -11,7 +11,7 @@ class Engine(){
     private val observer: Observer = Observer(this)
     private val flightGenerator = FlightGenerator(observer)
     private val customerGenerator = new CustomerGenerator(this)
-    private val currentTime = new Date()
+    private var currentTime = new Date()
     
     //ja to bym dał jako osobne metody zapisujące do tych varów, a nie że się wywołują przy tworzeniu engina
     private var flights : Array[Flight] = flightGenerator.generateTimetable(timetableLength)
@@ -27,18 +27,18 @@ class Engine(){
     }
 
     def work(days: Int): Unit = {
-        var date = new Date()
+        // var date = new Date()
         for(day <- 1 to days){
-            date = new Date(date.getTime() + 86400000)
+            currentTime = new Date(currentTime.getTime() + 86400000)
             for(flight <- flights){
-                if(date.getDate() == flight.getDate().getDate() && date.getMonth() == flight.getDate().getMonth() && date.getYear() == flight.getDate().getYear()){
+                if(currentTime.getDate() == flight.getDate().getDate() && currentTime.getMonth() == flight.getDate().getMonth() && currentTime.getYear() == flight.getDate().getYear()){
                     flight.fly()
                 }
             }
             // println(date)
             observer.getStatisticsFromDay(date)
+            Thread.sleep(1000)
         }
-        
     }
 
     def reservePlaces(flightId: Int, numberOfCustomers: Int, isBusiness: Boolean) : Unit = {
