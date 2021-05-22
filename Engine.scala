@@ -37,9 +37,9 @@ class Engine(){
         // var date = new Date()
 
         //generate customers, each of them books a flight
-         customers = customerGenerator.generateCustomers(100)
-         for(customer <- customers)
-             customer.bookFlight(null, null)
+        customers = customerGenerator.generateCustomers(2000) ++ customers
+        for(customer <- customers)
+            customer.bookFlight(null, null)
 
         for(day <- 1 to days){
             date = new Date(date.getTime() + 86400000)

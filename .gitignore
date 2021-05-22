@@ -12,3 +12,7 @@ ex.scala
 .metals/readonly/dependencies/scala-library-2.12.13-sources.jar/scala/collection/TraversableLike.scala
 .metals/readonly/dependencies/scala-library-2.12.13-sources.jar/scala/collection/SetLike.scala
 .metals/readonly/dependencies/scala-library-2.12.13-sources.jar/scala/Array.scala
+Customer.scala
+.metals/readonly/dependencies/scala-library-2.12.13-sources.jar/scala/collection/mutable/Set.scala
+.metals/readonly/dependencies/scala-library-2.12.13-sources.jar/scala/collection/immutable/List.scala
+.metals/readonly/dependencies/scala-library-2.12.13-sources.jar/scala/Predef.scala

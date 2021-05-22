@@ -25,11 +25,11 @@ class Customer(private val name: String, private val countries: scala.collection
         var flights : Array[Flight] = this.engine.getFlights()
         
         //basic criteria
-        flights = flights.filter(f => (f.getFreePlacesNumber() >= numberOfCustomers && f.getStatus() == Status.Arriving)
-                        && countries.contains(f.getDirection()) && checkDaysInAdvance(f.getDate()))
+        flights = flights.filter(f => (f.getFreePlacesNumber() >= numberOfCustomers && f.getStatus() == Status.Arriving
+                        && countries.contains(f.getDirection()) && checkDaysInAdvance(f.getDate())))
 
         if(postponeDirection != null){
-            flights = flights.filter(f => (f.getDirection == postponeDirection && f.getDate().after(postponeDate)))
+            flights = flights.filter(f => (f.getDirection() == postponeDirection && f.getDate().after(postponeDate)))
         }
 
         // first class
@@ -45,15 +45,10 @@ class Customer(private val name: String, private val countries: scala.collection
             isBusiness = false
             flights = flights.filter(f => ( priceRange(0) <= f.getPrice() && priceRange(1) >= f.getPrice()))
         }
-                                
-        println("===============================================================================\n [FILTERED FLIGHTS]")
-        for(f <- flights)
-            println(f.toString())
+
         
         if(flights.size > 0){
             val selectedFlight = flights(Random.nextInt(flights.size))
-            println("===============================================================================\n [SELECTED FLIGHT]")
-            println(selectedFlight.toString())
             selectedFlight.getId() +: bookedFlights
 
             engine.reservePlaces(selectedFlight.getId(), numberOfCustomers, isBusiness)
@@ -99,8 +94,8 @@ class Customer(private val name: String, private val countries: scala.collection
             }
             val numberOfCustomers = Random.nextInt(9) + 1
             val daysInAdvance = Random.nextInt(7)
-            val minPrice = (50 + Random.nextInt(200)).toDouble
-            val maxPrice = (minPrice + Random.nextInt(300)).toDouble
+            val minPrice = 0.0//(50 + Random.nextInt(200)).toDouble
+            val maxPrice = 1000.0//(minPrice + Random.nextInt(300)).toDouble
             val priceRange = List(minPrice, maxPrice)
             val tripReason = TripReason(Random.nextInt(TripReason.maxId))
             new Customer(name, directions, numberOfCustomers, daysInAdvance, priceRange, tripReason, engine)
@@ -108,8 +103,10 @@ class Customer(private val name: String, private val countries: scala.collection
 
         def generateCustomers(numberOfCustomers: Int): List[Customer] ={
             var newCustomers : List[Customer] = List()
-            for( _ <- 0 to numberOfCustomers)
-                generateCustomer() +: newCustomers
+            for( _ <- 0 to numberOfCustomers){
+                var customer = generateCustomer()
+                newCustomers = customer :: newCustomers
+            }
             newCustomers 
         }
     }
