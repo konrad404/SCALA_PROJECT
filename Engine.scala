@@ -14,7 +14,7 @@ class Engine(){
     private var date = new Date()
     
     private var flights : Array[Flight] = flightGenerator.generateTimetable(timetableLength)
-    private var customers : List[Customer]
+    // private var customers : List[Customer]
 
 
     def getFlights():Array[Flight]={this.flights}
@@ -25,25 +25,25 @@ class Engine(){
         }
     }
 
-    def showTimetable(day: Date){
-        for(flight <- flights){
-            if(day.getDate() == flight.getDate().getDate() && day.getMonth() == flight.getDate().getMonth() && day.getYear() == flight.getDate().getYear()){
-                println(flight)
-            }
-        }
-    }
+    // def showTimetable(day: Date){
+    //     for(flight <- flights){
+    //         if(day.getDate() == flight.getDate().getDate() && day.getMonth() == flight.getDate().getMonth() && day.getYear() == flight.getDate().getYear()){
+    //             println(flight)
+    //         }
+    //     }
+    // }
 
     def work(days: Int): Unit = {
         // var date = new Date()
 
         //generate customers, each of them books a flight
-        customers = customerGenerator.generateCustomers(100)
-        for(customer <- customer)
-            customer.bookFlight(null, null)
+        // customers = customerGenerator.generateCustomers(100)
+        // for(customer <- customer)
+        //     customer.bookFlight(null, null)
 
         for(day <- 1 to days){
             date = new Date(date.getTime() + 86400000)
-            showTimetable(date)
+            // showTimetable(date)
             println()
             for(flight <- flights){
                 if(date.getDate() == flight.getDate().getDate() && date.getMonth() == flight.getDate().getMonth() && date.getYear() == flight.getDate().getYear()){

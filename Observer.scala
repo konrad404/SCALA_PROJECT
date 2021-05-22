@@ -36,6 +36,7 @@ package Observer{
             flightsNumber += 1
         }
 
+
         def getStatisticsFromDay(day: Date) : String = {
             var todaysFlights: Array[Flight] = Array()
             for(flight <- pastFlights){
@@ -43,6 +44,8 @@ package Observer{
                     todaysFlights = todaysFlights :+ flight
                 }
             }
+            var sumDelay = 0.0
+            var countDelay = 0
             var count = 0
             var places = 0 
             var income = 0.0
@@ -51,8 +54,10 @@ package Observer{
                 count += 1
                 places += flight.getTakenPlaces()
                 income += flight.getCurrIncome()
+                sumDelay += flight.getDelay()
+                countDelay +=1
             }
-            val res: String = "Flights on day: "+  (day.getYear()+ 1900) + ".0" +  (day.getMonth() + 1) + "." + day.getDate()+ " : "+  count+ " clients number: "+ places+ " income: "+ income + "0"
+            val res: String = "\n\nFlights on day: "+  (day.getYear()+ 1900) + ".0" +  (day.getMonth() + 1) + "." + day.getDate()+ " : "+  count+ " clients number: "+ places+ " income: "+ income + "0" + " average delay in hours: " + scala.math.BigDecimal(sumDelay/countDelay).setScale(3, BigDecimal.RoundingMode.HALF_UP)
             println(res)
             res
         }
