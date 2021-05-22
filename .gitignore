@@ -9,3 +9,6 @@ ex.scala
 .metals/readonly/scala/util/Random.scala
 .metals/readonly/scala/collection/immutable/Range.scala
 .metals/readonly/scala/Double.scala
+.metals/readonly/dependencies/scala-library-2.12.13-sources.jar/scala/collection/TraversableLike.scala
+.metals/readonly/dependencies/scala-library-2.12.13-sources.jar/scala/collection/SetLike.scala
+.metals/readonly/dependencies/scala-library-2.12.13-sources.jar/scala/Array.scala

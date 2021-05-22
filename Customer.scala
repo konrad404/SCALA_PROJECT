@@ -13,26 +13,51 @@ class Customer(private val name: String, private val countries: scala.collection
 
     private val bookedFlights : List[Int] = List()
     private val takenFlights : List[Int] = List()
+    private var isBusiness = false
 
-    def bookFlight():Unit={
+    def checkDaysInAdvance(flightDate: Date):Boolean = {
+        val flightTime = flightDate.getTime()
+        val currTime = engine.getDate().getTime()
+        flightTime > currTime && ((flightTime - currTime) / 86400000 >= daysInAdvance)
+    }
+
+    def bookFlight(postponeDirection: Direction.Value, postponeDate: Date):Unit={
         var flights : Array[Flight] = this.engine.getFlights()
-
-        //days in advance do ogarnięcia
-        flights = flights.filter(f => (priceRange(0) <= f.getPrice() && priceRange(1) >= f.getPrice() &&
-                        priceRange(0) <= f.getFirstClassPrice() && priceRange(1) >= f.getFirstClassPrice() &&
-                        f.getFreePlacesNumber() >= numberOfCustomers && f.getStatus() == Status.Arriving)
-                        && countries.contains(f.getDirection()))
         
+        //basic criteria
+        flights = flights.filter(f => (f.getFreePlacesNumber() >= numberOfCustomers && f.getStatus() == Status.Arriving)
+                        && countries.contains(f.getDirection()) && checkDaysInAdvance(f.getDate()))
+
+        if(postponeDirection != null){
+            flights = flights.filter(f => (f.getDirection == postponeDirection && f.getDate().after(postponeDate)))
+        }
+
+        // first class
+        var firstClassFlights = flights.filter(f => (f.getFreeBusinessPlacesNumber() >= numberOfCustomers &&
+                                priceRange(0) <= f.getFirstClassPrice() && priceRange(1) >= f.getFirstClassPrice()))
+        
+        if(firstClassFlights.size > 0){
+            flights = firstClassFlights
+            isBusiness = true
+        }
+        else{
+            //economic class
+            isBusiness = false
+            flights = flights.filter(f => ( priceRange(0) <= f.getPrice() && priceRange(1) >= f.getPrice()))
+        }
+                                
         println("===============================================================================\n [FILTERED FLIGHTS]")
         for(f <- flights)
             println(f.toString())
         
-        val selectedFlight = flights(Random.nextInt(flights.size))
-        println("===============================================================================\n [SELECTED FLIGHT]")
-        println(selectedFlight.toString())
-        selectedFlight.getId() +: bookedFlights
+        if(flights.size > 0){
+            val selectedFlight = flights(Random.nextInt(flights.size))
+            println("===============================================================================\n [SELECTED FLIGHT]")
+            println(selectedFlight.toString())
+            selectedFlight.getId() +: bookedFlights
 
-        engine.reservePlaces(selectedFlight.getId(), numberOfCustomers)
+            engine.reservePlaces(selectedFlight.getId(), numberOfCustomers, isBusiness)
+        }
     }
 
     def cancelFlight(flightId: Int):Unit={
@@ -46,9 +71,15 @@ class Customer(private val name: String, private val countries: scala.collection
 
     def buyAdditionalTicket(flightId: Int, amount: Int):Unit={
         var flight: Flight = this.engine.getFlights()(flightId)
+        numberOfCustomers += amount
 
-        if(flight.getDate().after(engine.getDate()) && flight.getFreePlacesNumber() >= amount)
-            engine.reservePlaces(flightId, amount)
+        if(flight.getDate().after(engine.getDate()) && (isBusiness && flight.getFreeBusinessPlacesNumber() >= amount)
+            || !isBusiness && flight.getFreeEconomicPlacesNumber() >= amount)
+            engine.reservePlaces(flightId, amount, isBusiness)
+    }
+
+    def flightPostponement(flightId: Int):Unit={
+         var flights : Array[Flight] = this.engine.getFlights()
     }
 
     override def toString():String={
@@ -67,7 +98,7 @@ class Customer(private val name: String, private val countries: scala.collection
                 directions.add(Direction(Random.nextInt(Direction.maxId)))
             }
             val numberOfCustomers = Random.nextInt(9) + 1
-            val daysInAdvance = Random.nextInt(150)
+            val daysInAdvance = Random.nextInt(7)
             val minPrice = (50 + Random.nextInt(200)).toDouble
             val maxPrice = (minPrice + Random.nextInt(300)).toDouble
             val priceRange = List(minPrice, maxPrice)
@@ -94,15 +125,6 @@ class Customer(private val name: String, private val countries: scala.collection
         def generateName():String={
             names(Random.nextInt(names.size)) + " " + surnames(Random.nextInt(surnames.size))
         }
-
     }
 
 }
-
-/*
-zamów lot ok
-odwołaj lot ok
-przełóż na następny termin - y jak
-przyjedź na lot ok
-dokupić bilet ok
-*/
