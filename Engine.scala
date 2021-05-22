@@ -7,7 +7,7 @@ import java.util.Date
 package Engine{
 
 class Engine(){
-    private var timetableLength = 20
+    private var timetableLength = 2000
     private val observer: Observer = Observer(this)
     private val flightGenerator = FlightGenerator(observer)
     private val customerGenerator = new CustomerGenerator(this)
@@ -26,10 +26,20 @@ class Engine(){
         }
     }
 
+    def showTimetable(day: Date){
+        for(flight <- flights){
+            if(day.getDate() == flight.getDate().getDate() && day.getMonth() == flight.getDate().getMonth() && day.getYear() == flight.getDate().getYear()){
+                println(flight)
+            }
+        }
+    }
+
     def work(days: Int): Unit = {
         // var date = new Date()
         for(day <- 1 to days){
-            currentTime = new Date(date.getTime() + 86400000)
+            date = new Date(date.getTime() + 86400000)
+            showTimetable(date)
+            println()
             for(flight <- flights){
                 if(date.getDate() == flight.getDate().getDate() && date.getMonth() == flight.getDate().getMonth() && date.getYear() == flight.getDate().getYear()){
                     flight.fly()
@@ -37,6 +47,7 @@ class Engine(){
             }
             // println(date)
             observer.getStatisticsFromDay(date)
+            println("\n")
             Thread.sleep(1000)
         }
     }
