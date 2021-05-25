@@ -26,11 +26,16 @@ class Engine(){
     }
 
     def work(days: Int): Unit = {
-        customers = customerGenerator.generateCustomers(20000) ++ customers
-        for(customer <- customers)
+        var newCustomers : List[Customer] = customerGenerator.generateCustomers(2000)
+        customers = newCustomers ++ customers
+        for(customer <- newCustomers)
             customer.bookFlight(null, null)
 
         for(day <- 1 to days){
+            newCustomers= customerGenerator.generateCustomers(2000)
+            customers = newCustomers ++ customers
+            for(customer <- newCustomers)
+                customer.bookFlight(null, null)
             date = new Date(date.getTime() + 86400000)
             println()
             for(flight <- flights){
