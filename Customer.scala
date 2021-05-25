@@ -43,7 +43,8 @@ class Customer(private val name: String, private val countries: scala.collection
         else{
             //economic class
             isBusiness = false
-            flights = flights.filter(f => ( priceRange(0) <= f.getPrice() && priceRange(1) >= f.getPrice()))
+            flights = flights.filter(f => (f.getFreeEconomicPlacesNumber() >= numberOfCustomers &&
+                                             priceRange(0) <= f.getPrice() && priceRange(1) >= f.getPrice()))
         }
                               
         //println("===============================================================================\n [FILTERED FLIGHTS]")
