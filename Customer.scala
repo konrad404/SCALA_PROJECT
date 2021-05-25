@@ -62,10 +62,6 @@ class Customer(private val name: String, private val countries: scala.collection
         }
     }
 
-    def cancelFlight(flightId: Int):Unit={
-        bookedFlights.drop(flightId)
-    }
-
     def takeFlight(flightId: Int):Unit={
         bookedFlights.drop(flightId)
         flightId +: takenFlights
@@ -83,6 +79,7 @@ class Customer(private val name: String, private val countries: scala.collection
     def flightPostponement(flightId: Int):Unit={
         var flightToChange : Flight = this.engine.getFlights()(flightId)
         bookedFlights.drop(flightId)
+        engine.deleteReservedPlaces(flightId, numberOfCustomers, isBusiness)
         bookFlight(flightToChange.getDirection(), flightToChange.getDate())
     }
 
