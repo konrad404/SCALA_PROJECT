@@ -45,17 +45,18 @@ class Customer(private val name: String, private val countries: scala.collection
             isBusiness = false
             flights = flights.filter(f => ( priceRange(0) <= f.getPrice() && priceRange(1) >= f.getPrice()))
         }
-                                
-        println("===============================================================================\n [FILTERED FLIGHTS]")
-        for(f <- flights)
-            println(f.toString())
+                              
+        //println("===============================================================================\n [FILTERED FLIGHTS]")
+        //for(f <- flights)
+        //    println(f.toString())
         
         if(flights.size > 0){
             val selectedFlight = flights(Random.nextInt(flights.size))
-            println("===============================================================================\n [SELECTED FLIGHT]")
-            println(selectedFlight.toString())
+            //println("===============================================================================\n [SELECTED FLIGHT]")
+            ///println(selectedFlight.toString())
+        
             selectedFlight.getId() +: bookedFlights
-
+        
             engine.reservePlaces(selectedFlight.getId(), numberOfCustomers, isBusiness)
         }
     }
