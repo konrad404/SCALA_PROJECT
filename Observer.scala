@@ -57,7 +57,10 @@ package Observer{
                 sumDelay += flight.getDelay()
                 countDelay +=1
             }
-            val res: String = "\n\nFlights on day: "+  (day.getYear()+ 1900) + ".0" +  (day.getMonth() + 1) + "." + day.getDate()+ " : "+  count+ " clients number: "+ places+ " income: "+ income + "0" + " average delay in hours: " + scala.math.BigDecimal(sumDelay/countDelay).setScale(3, BigDecimal.RoundingMode.HALF_UP)
+            if(countDelay == 0){
+                countDelay+=1
+            }
+            val res: String = "\n\nDay: "+  (day.getYear()+ 1900) + ".0" +  (day.getMonth() + 1) + "." + day.getDate()+ "  Statistics: Flights number: "+  count+ " clients number: "+ places+ " income: "+ income + "0" + " average delay in hours: " + scala.math.BigDecimal(sumDelay/countDelay).setScale(3, BigDecimal.RoundingMode.HALF_UP)
             println(res)
             res
         }

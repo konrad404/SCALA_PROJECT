@@ -37,7 +37,7 @@ class Engine(){
         // var date = new Date()
 
         //generate customers, each of them books a flight
-        customers = customerGenerator.generateCustomers(2000) ++ customers
+        customers = customerGenerator.generateCustomers(20000) ++ customers
         for(customer <- customers)
             customer.bookFlight(null, null)
 
