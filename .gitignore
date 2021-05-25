@@ -16,3 +16,10 @@ Customer.scala
 .metals/readonly/dependencies/scala-library-2.12.13-sources.jar/scala/collection/mutable/Set.scala
 .metals/readonly/dependencies/scala-library-2.12.13-sources.jar/scala/collection/immutable/List.scala
 .metals/readonly/dependencies/scala-library-2.12.13-sources.jar/scala/Predef.scala
+executor.scala
+.metals/readonly/dependencies/scala-library-2.12.13-sources.jar/scala/Double.scala
+.metals/readonly/dependencies/scala-library-2.12.13-sources.jar/scala/Long.scala
+.metals/readonly/dependencies/scala-library-2.12.13-sources.jar/scala/package.scala
+.metals/readonly/dependencies/scala-library-2.12.13-sources.jar/scala/collection/generic/FilterMonadic.scala
+.metals/readonly/dependencies/scala-library-2.12.13-sources.jar/scala/util/Random.scala
+.metals/readonly/scala/math/ScalaNumericConversions.scala
