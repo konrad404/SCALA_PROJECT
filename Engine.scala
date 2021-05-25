@@ -25,32 +25,19 @@ class Engine(){
         }
     }
 
-    // def showTimetable(day: Date){
-    //     for(flight <- flights){
-    //         if(day.getDate() == flight.getDate().getDate() && day.getMonth() == flight.getDate().getMonth() && day.getYear() == flight.getDate().getYear()){
-    //             println(flight)
-    //         }
-    //     }
-    // }
-
     def work(days: Int): Unit = {
-        // var date = new Date()
-
-        //generate customers, each of them books a flight
         customers = customerGenerator.generateCustomers(20000) ++ customers
         for(customer <- customers)
             customer.bookFlight(null, null)
 
         for(day <- 1 to days){
             date = new Date(date.getTime() + 86400000)
-            // showTimetable(date)
             println()
             for(flight <- flights){
                 if(date.getDate() == flight.getDate().getDate() && date.getMonth() == flight.getDate().getMonth() && date.getYear() == flight.getDate().getYear()){
                     flight.fly()
                 }
             }
-            // println(date)
             for(customer <- customers)
                 customer.randomEvent()
 

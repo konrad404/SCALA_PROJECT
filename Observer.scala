@@ -15,22 +15,6 @@ package Observer{
         private var pastFlights:  Array[Flight] = Array()
         private var flightsNumber: Int = 0
 
-        // val today = new Date()
-        // var time = today.getTime()
-        // var seed: Long = scala.math.pow(10,10).toLong
-        // var toAdd = Random.nextLong(seed)
-        // // val data = new Date(time + toAdd)
-        // val places = Sizes(Random.nextInt(Sizes.maxId)).toString().toInt
-        // val probability = Random.nextDouble()
-        // val direction = Direction(Random.nextInt(Direction.maxId))
-        // val inOut = Status(Random.nextInt(2))
-        // val runaway = Runaways(Random.nextInt(Runaways.maxId))
-        // val price = (20 + Random.nextInt(20)).toDouble
-        // val flight1 =  new Flight(direction,inOut,places,today,probability,runaway,price, this)
-        // flight1.res_places(5,true)
-        // flight1.res_places(10,false)
-        // flightTookPlaace(flight1)
-
         def flightTookPlaace(flight: Flight) : Unit = {
             pastFlights = pastFlights :+ flight
             flightsNumber += 1

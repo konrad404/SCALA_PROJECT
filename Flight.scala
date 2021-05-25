@@ -29,8 +29,6 @@ package Flight{
         private var takenBusinessPlaces = 0
         private var flightDelay: Double = 0.0
 
-        // println(places, freeBusinessPlaces, freePlaces)
-
 
 
         private val id = Flight.getNewId()
@@ -42,10 +40,6 @@ package Flight{
         def getDate(): Date = date
         def getDelay(): Double = flightDelay
         def res_places(n: Int, isBusiness: Boolean): Unit ={
-            // if(n > freePlaces){
-            //     throw new IllegalArgumentException("There is not enough places")
-            // }
-            // freePlaces -= n
             if(isBusiness){
                 if(n > freeBusinessPlaces){
                     throw new IllegalArgumentException("There is not enough places")
@@ -71,8 +65,6 @@ package Flight{
                 val delay = ((scala.math.abs(Random.nextGaussian()))/24 * 86400000).toLong
                 date = new Date(date.getTime() + delay)
                 flightDelay = delay.toDouble/(3600000)
-                // println(delay.toDouble/(3600000))
-                // println("opóźnienie: " + flightDelay)
             }
             observer.flightTookPlaace(this)
         }
