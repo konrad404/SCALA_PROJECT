@@ -39,7 +39,7 @@ package Flight{
         def isLeaving(): Boolean  = (status == Status.Leaving)
         def getDate(): Date = date
         def getDelay(): Double = flightDelay
-        def res_places(n: Int, isBusiness: Boolean): Unit ={
+        def resPlaces(n: Int, isBusiness: Boolean): Unit ={
             if(isBusiness){
                 if(n > freeBusinessPlaces){
                     throw new IllegalArgumentException("There is not enough places")
@@ -57,6 +57,17 @@ package Flight{
                     takenPlaces += n
                     freePlaces -= n
                 }
+            }
+        }
+
+        def deleteRes(n: Int, isBusiness: Boolean): Unit = {
+            if(isBusiness){
+                takenBusinessPlaces -= n
+                freeBusinessPlaces+=n
+            }
+            else{
+                takenPlaces-=n
+                freePlaces+=n
             }
         }
 

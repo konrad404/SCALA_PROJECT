@@ -48,7 +48,11 @@ class Engine(){
     }
 
     def reservePlaces(flightId: Int, numberOfCustomers: Int, isBusiness: Boolean) : Unit = {
-        flights(flightId-1).res_places(numberOfCustomers, isBusiness)
+        flights(flightId-1).resPlaces(numberOfCustomers, isBusiness)
+    }
+
+    def deleteReservedPlaces(flightId: Int, numberOfCustomers: Int, isBusiness: Boolean): Unit = {
+        flights(flightId-1).deleteRes(numberOfCustomers, isBusiness)
     }
 
     def getDate(): Date = date
