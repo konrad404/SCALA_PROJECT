@@ -25,7 +25,7 @@ class Customer(private val name: String, private val countries: scala.collection
         var flights : Array[Flight] = this.engine.getFlights()
         
         //basic criteria
-        flights = flights.filter(f => (f.getFreePlacesNumber() >= numberOfCustomers && f.getStatus() == Status.Arriving
+        flights = flights.filter(f => (f.getFreePlacesNumber() >= numberOfCustomers
                         && countries.contains(f.getDirection()) && checkDaysInAdvance(f.getDate())))
 
         if(postponeDirection != null){
@@ -45,10 +45,15 @@ class Customer(private val name: String, private val countries: scala.collection
             isBusiness = false
             flights = flights.filter(f => ( priceRange(0) <= f.getPrice() && priceRange(1) >= f.getPrice()))
         }
-
+                                
+        println("===============================================================================\n [FILTERED FLIGHTS]")
+        for(f <- flights)
+            println(f.toString())
         
         if(flights.size > 0){
             val selectedFlight = flights(Random.nextInt(flights.size))
+            println("===============================================================================\n [SELECTED FLIGHT]")
+            println(selectedFlight.toString())
             selectedFlight.getId() +: bookedFlights
 
             engine.reservePlaces(selectedFlight.getId(), numberOfCustomers, isBusiness)
@@ -74,11 +79,26 @@ class Customer(private val name: String, private val countries: scala.collection
     }
 
     def flightPostponement(flightId: Int):Unit={
-         var flights : Array[Flight] = this.engine.getFlights()
+        var flightToChange : Flight = this.engine.getFlights()(flightId)
+        bookedFlights.drop(flightId)
+        bookFlight(flightToChange.getDirection(), flightToChange.getDate())
     }
 
     override def toString():String={
         name + " " + countries.toString() + " " + numberOfCustomers + " " + daysInAdvance + " " + priceRange.toString() + " " + tripReason 
+    }
+
+    def randomEvent():Unit={
+        //postponing a flight event
+        if(bookedFlights.size > 0){
+            if(Random.nextInt(100) % 10 == 0){
+                flightPostponement(bookedFlights(Random.nextInt(bookedFlights.size)))
+            }
+            //buy additional tickets event
+            if(Random.nextInt(100) % 9 == 0){
+                buyAdditionalTicket(bookedFlights(Random.nextInt(bookedFlights.size)), Random.nextInt(10))
+            }
+        }
     }
 }
 
@@ -94,8 +114,8 @@ class Customer(private val name: String, private val countries: scala.collection
             }
             val numberOfCustomers = Random.nextInt(9) + 1
             val daysInAdvance = Random.nextInt(7)
-            val minPrice = 0.0//(50 + Random.nextInt(200)).toDouble
-            val maxPrice = 1000.0//(minPrice + Random.nextInt(300)).toDouble
+            val minPrice = (50 + Random.nextInt(200)).toDouble
+            val maxPrice = (minPrice + Random.nextInt(300)).toDouble
             val priceRange = List(minPrice, maxPrice)
             val tripReason = TripReason(Random.nextInt(TripReason.maxId))
             new Customer(name, directions, numberOfCustomers, daysInAdvance, priceRange, tripReason, engine)

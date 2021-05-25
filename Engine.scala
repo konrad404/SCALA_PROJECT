@@ -7,7 +7,7 @@ import java.util.Date
 package Engine{
 
 class Engine(){
-    private var timetableLength = 2000
+    private var timetableLength = 20
     private val observer: Observer = Observer(this)
     private val flightGenerator = FlightGenerator(observer)
     private val customerGenerator = new CustomerGenerator(this)
@@ -37,7 +37,7 @@ class Engine(){
         // var date = new Date()
 
         //generate customers, each of them books a flight
-        customers = customerGenerator.generateCustomers(2000) ++ customers
+        customers = customerGenerator.generateCustomers(20) ++ customers
         for(customer <- customers)
             customer.bookFlight(null, null)
 
@@ -51,6 +51,9 @@ class Engine(){
                 }
             }
             // println(date)
+            for(customer <- customers)
+                customer.randomEvent()
+                
             observer.getStatisticsFromDay(date)
             println("\n")
             Thread.sleep(1000)
