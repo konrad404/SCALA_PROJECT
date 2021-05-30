@@ -1,7 +1,7 @@
 package Enums{
 object Direction extends Enumeration {
     type Direction = Value
-    val London, Madrit, Barcelona, Berlin, New_York, Dubai, Roma, Paris = Value
+    val London, Madrit, Berlin, Minsk, Dubai, Roma, Paris = Value
 }
 
 object TripReason extends Enumeration {

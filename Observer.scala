@@ -33,8 +33,11 @@ package Observer{
             var places = 0 
             var income = 0.0
             var fillPercentage = 0.0
+            var res: String = ""
             for(flight <- todaysFlights){
                 println(flight)
+                res += flight.toString()
+                res += "\n"
                 count += 1
                 places += flight.getTakenPlaces()
                 income += flight.getCurrIncome()
@@ -46,7 +49,7 @@ package Observer{
                 countDelay+=1
             }
             fillPercentage = 100 * fillPercentage / countDelay
-            val res: String = "\n\nDay: "+  (day.getYear()+ 1900) + ".0" +  (day.getMonth() + 1) + "." + day.getDate()+ "  Statistics: Flights number: "+  count+ " clients number: "+ places+ " income: "+ income + "0" + " average delay in hours: " + scala.math.BigDecimal(sumDelay/countDelay).setScale(2, BigDecimal.RoundingMode.HALF_UP) + " average percentage of taken places in flights: " + scala.math.BigDecimal(fillPercentage).setScale(2, BigDecimal.RoundingMode.HALF_UP)
+            res += "\n\nDay: "+  (day.getYear()+ 1900) + ".0" +  (day.getMonth() + 1) + "." + day.getDate()+ "  Statistics: Flights number: "+  count+ " clients number: "+ places+ " income: "+ income + "0" + " average delay in hours: " + scala.math.BigDecimal(sumDelay/countDelay).setScale(2, BigDecimal.RoundingMode.HALF_UP) + " average percentage of taken places in flights: " + scala.math.BigDecimal(fillPercentage).setScale(2, BigDecimal.RoundingMode.HALF_UP)
             println(res)
             res
         }

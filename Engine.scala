@@ -31,7 +31,8 @@ class Engine(){
         customers = newCustomers ++ customers
         for(customer <- newCustomers)
             customer.bookFlight(null, null)
-
+        val fileSchedule = new File("Schedule.txt" ) 
+        val writer = new PrintWriter(fileSchedule)
         for(day <- 1 to days){
             newCustomers= customerGenerator.generateCustomers(500)
             customers = newCustomers ++ customers
@@ -46,11 +47,13 @@ class Engine(){
             }
             for(customer <- customers)
                 customer.randomEvent()
-
-            observer.getStatisticsFromDay(date)
+            writer.write("\nDay" + day + ":\n")
+            writer.write(observer.getStatisticsFromDay(date))
             println("\n")
             Thread.sleep(1000)
+
         }
+        writer.close()
         val endStatistics: String = observer.getEndStatisticsToDay(date)
         val fileObject = new File("EndStatistics.txt" ) 
         val printWriter = new PrintWriter(fileObject)
