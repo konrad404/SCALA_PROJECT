@@ -1,13 +1,15 @@
+import Enums.Direction
+import Enums.Sizes
+import Enums.Runaways
+import Enums.Status
+import java.util.Calendar
+import java.util.Date
+import scala.util.Random
+import scala.math.BigDecimal
+import Observer._
+
 package Flight{
-    import Enums.Direction
-    import Enums.Sizes
-    import Enums.Runaways
-    import Enums.Status
-    import java.util.Calendar
-    import java.util.Date
-    import scala.util.Random
-    import scala.math.BigDecimal
-    import Observer._
+
 
     class InvalidProbabilityException(s:String) extends Exception(s){}  
 

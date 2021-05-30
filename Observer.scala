@@ -1,16 +1,16 @@
-package Observer{
-    import Engine._
-    import Flight._
-    import Enums.Direction
-    import Enums.Sizes
-    import Enums.Runaways
-    import Enums.Status
-    import java.util.Calendar
-    import java.util.Date
-    import scala.util.Random
-    import scala.math.BigDecimal
+import Engine._
+import Flight._
+import Enums.Direction
+import Enums.Sizes
+import Enums.Runaways
+import Enums.Status
+import java.util.Calendar
+import java.util.Date
+import scala.util.Random
+import scala.math.BigDecimal
 
-    class Observer(val engine: Engine){
+package Observer{
+        class Observer(val engine: Engine){
         private var pastFlights:  Array[Flight] = Array()
         private var flightsNumber: Int = 0
 
