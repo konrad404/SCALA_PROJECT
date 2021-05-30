@@ -1,7 +1,5 @@
 import Enums.Direction
 import Enums.Sizes
-import Enums.Runaways
-import Enums.Status
 import java.util.Calendar
 import java.util.Date
 import scala.util.Random
@@ -15,7 +13,7 @@ package Flight{
 
 
     class Flight(private val direction: Direction.Value, private val status: Status.Value, private var places: Int, private var date: Date,
-     private val changeTimeProb: Double, private val runway: Runaways.Value, private val price: Double, private val observer: Observer){
+     private val changeTimeProb: Double, private val price: Double, private val observer: Observer){
         if(places <= 0){
             throw new IllegalArgumentException
         }
@@ -120,9 +118,8 @@ package Flight{
             val probability = Random.nextDouble()/3
             val direction = Direction(Random.nextInt(Direction.maxId))
             val inOut = Status(Random.nextInt(2))
-            val runaway = Runaways(Random.nextInt(Runaways.maxId))
             val price = (minPrice + Random.nextInt(priceBracket)).toDouble
-            new Flight(direction,inOut,places,data,probability,runaway,price, observer)
+            new Flight(direction,inOut,places,data,probability,price, observer)
         }
         
         def generateTimetable(amount:  Int): Array[Flight] = {
