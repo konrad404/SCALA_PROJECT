@@ -1,5 +1,4 @@
 package Observer{
-
     import Engine._
     import Flight._
     import Enums.Direction
@@ -47,7 +46,7 @@ package Observer{
                 countDelay+=1
             }
             fillPercentage = 100 * fillPercentage / countDelay
-            val res: String = "\n\nDay: "+  (day.getYear()+ 1900) + ".0" +  (day.getMonth() + 1) + "." + day.getDate()+ "  Statistics: Flights number: "+  count+ " clients number: "+ places+ " income: "+ income + "0" + " average delay in hours: " + scala.math.BigDecimal(sumDelay/countDelay).setScale(3, BigDecimal.RoundingMode.HALF_UP) + " average percentage of taken places in flights: " + scala.math.BigDecimal(fillPercentage).setScale(3, BigDecimal.RoundingMode.HALF_UP)
+            val res: String = "\n\nDay: "+  (day.getYear()+ 1900) + ".0" +  (day.getMonth() + 1) + "." + day.getDate()+ "  Statistics: Flights number: "+  count+ " clients number: "+ places+ " income: "+ income + "0" + " average delay in hours: " + scala.math.BigDecimal(sumDelay/countDelay).setScale(2, BigDecimal.RoundingMode.HALF_UP) + " average percentage of taken places in flights: " + scala.math.BigDecimal(fillPercentage).setScale(2, BigDecimal.RoundingMode.HALF_UP)
             println(res)
             res
         }
@@ -78,10 +77,9 @@ package Observer{
                 countDelay+=1
             }
             fillPercentage = 100 * fillPercentage / countDelay
-            val res: String = ("\n\nEnd Statistics to day: "+  (day.getYear()+ 1900) + ".0" +  (day.getMonth() + 1) + "." + day.getDate()+ "  Statistics: Flights number: "
-            +  count+ " clients number: "+ places+ " income: "+ income + "0" + " average delay in hours: " 
-            + scala.math.BigDecimal(sumDelay/countDelay).setScale(3, BigDecimal.RoundingMode.HALF_UP) 
-            + " average percentage of taken places in flights: " + scala.math.BigDecimal(fillPercentage).setScale(3, BigDecimal.RoundingMode.HALF_UP))
+            val res: String = ("Flights number: " +  count + "\nclients number: "+ places+ "\nincome: "+ income + "0" + "\naverage delay in hours: " 
+            + scala.math.BigDecimal(sumDelay/countDelay).setScale(2, BigDecimal.RoundingMode.HALF_UP) 
+            + "\naverage percentage of taken places in flights: " + scala.math.BigDecimal(fillPercentage).setScale(2, BigDecimal.RoundingMode.HALF_UP))
             println(res)
             res
         }

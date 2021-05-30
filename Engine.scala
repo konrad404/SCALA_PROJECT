@@ -3,6 +3,7 @@ import Customer._
 import Enums._
 import Observer._
 import java.util.Date
+import java.io._ 
 
 package Engine{
 
@@ -50,7 +51,12 @@ class Engine(){
             println("\n")
             Thread.sleep(1000)
         }
-        observer.getEndStatisticsToDay(date)
+        val endStatistics: String = observer.getEndStatisticsToDay(date)
+        val fileObject = new File("EndStatistics.txt" ) 
+        val printWriter = new PrintWriter(fileObject)
+        printWriter.write("Statistics from " + days + " days:\n")
+        printWriter.write(endStatistics) 
+        printWriter.close() 
     }
 
     def reservePlaces(flightId: Int, numberOfCustomers: Int, isBusiness: Boolean) : Unit = {
