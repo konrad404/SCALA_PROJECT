@@ -26,13 +26,13 @@ class Engine(){
     }
 
     def work(days: Int): Unit = {
-        var newCustomers : List[Customer] = customerGenerator.generateCustomers(2000)
+        var newCustomers : List[Customer] = customerGenerator.generateCustomers(20000)
         customers = newCustomers ++ customers
         for(customer <- newCustomers)
             customer.bookFlight(null, null)
 
         for(day <- 1 to days){
-            newCustomers= customerGenerator.generateCustomers(2000)
+            newCustomers= customerGenerator.generateCustomers(500)
             customers = newCustomers ++ customers
             for(customer <- newCustomers)
                 customer.bookFlight(null, null)
@@ -50,6 +50,7 @@ class Engine(){
             println("\n")
             Thread.sleep(1000)
         }
+        observer.getEndStatisticsToDay(date)
     }
 
     def reservePlaces(flightId: Int, numberOfCustomers: Int, isBusiness: Boolean) : Unit = {

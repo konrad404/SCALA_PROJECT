@@ -33,6 +33,7 @@ package Observer{
             var count = 0
             var places = 0 
             var income = 0.0
+            var fillPercentage = 0.0
             for(flight <- todaysFlights){
                 println(flight)
                 count += 1
@@ -40,15 +41,51 @@ package Observer{
                 income += flight.getCurrIncome()
                 sumDelay += flight.getDelay()
                 countDelay +=1
+                fillPercentage += flight.getFillPercent()
             }
             if(countDelay == 0){
                 countDelay+=1
             }
-            val res: String = "\n\nDay: "+  (day.getYear()+ 1900) + ".0" +  (day.getMonth() + 1) + "." + day.getDate()+ "  Statistics: Flights number: "+  count+ " clients number: "+ places+ " income: "+ income + "0" + " average delay in hours: " + scala.math.BigDecimal(sumDelay/countDelay).setScale(3, BigDecimal.RoundingMode.HALF_UP)
+            fillPercentage = 100 * fillPercentage / countDelay
+            val res: String = "\n\nDay: "+  (day.getYear()+ 1900) + ".0" +  (day.getMonth() + 1) + "." + day.getDate()+ "  Statistics: Flights number: "+  count+ " clients number: "+ places+ " income: "+ income + "0" + " average delay in hours: " + scala.math.BigDecimal(sumDelay/countDelay).setScale(3, BigDecimal.RoundingMode.HALF_UP) + " average percentage of taken places in flights: " + scala.math.BigDecimal(fillPercentage).setScale(3, BigDecimal.RoundingMode.HALF_UP)
             println(res)
             res
         }
         
+        def getEndStatisticsToDay(day: Date) : String = {
+            var todaysFlights: Array[Flight] = Array()
+            for(flight <- pastFlights){
+                if (flight.getDate().compareTo(day) <= 0){
+                    todaysFlights = todaysFlights :+ flight
+                }
+            }
+            var sumDelay = 0.0
+            var countDelay = 0
+            var count = 0
+            var places = 0 
+            var income = 0.0
+            var fillPercentage = 0.0
+            for(flight <- todaysFlights){
+                // println(flight)
+                count += 1
+                places += flight.getTakenPlaces()
+                income += flight.getCurrIncome()
+                sumDelay += flight.getDelay()
+                countDelay +=1
+                fillPercentage += flight.getFillPercent()
+            }
+            if(countDelay == 0){
+                countDelay+=1
+            }
+            fillPercentage = 100 * fillPercentage / countDelay
+            val res: String = ("\n\nEnd Statistics to day: "+  (day.getYear()+ 1900) + ".0" +  (day.getMonth() + 1) + "." + day.getDate()+ "  Statistics: Flights number: "
+            +  count+ " clients number: "+ places+ " income: "+ income + "0" + " average delay in hours: " 
+            + scala.math.BigDecimal(sumDelay/countDelay).setScale(3, BigDecimal.RoundingMode.HALF_UP) 
+            + " average percentage of taken places in flights: " + scala.math.BigDecimal(fillPercentage).setScale(3, BigDecimal.RoundingMode.HALF_UP))
+            println(res)
+            res
+        }
+
     }
 
     object Observer {

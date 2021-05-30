@@ -28,10 +28,8 @@ package Flight{
         private var takenPlaces = 0
         private var takenBusinessPlaces = 0
         private var flightDelay: Double = 0.0
-
-
-
         private val id = Flight.getNewId()
+        
 
         def getPrice(): Double = price
         def getFirstClassPrice(): Double = firstClassPrice
@@ -39,6 +37,7 @@ package Flight{
         def isLeaving(): Boolean  = (status == Status.Leaving)
         def getDate(): Date = date
         def getDelay(): Double = flightDelay
+
         def resPlaces(n: Int, isBusiness: Boolean): Unit ={
             if(isBusiness){
                 if(n > freeBusinessPlaces){
@@ -89,6 +88,8 @@ package Flight{
         def getProbability(): Double = changeTimeProb
         def getStatus(): Status.Status = status
         def getId(): Int = id
+        def getFillPercent(): Double = ((takenBusinessPlaces + takenPlaces).toDouble / places)
+
         override def toString() = {
             "ID: " + id + "    \t Direction: " + direction + "\t date: " + date + "\t status: " + status + "\t places: " + places + "\t free: " + (freePlaces + freeBusinessPlaces) + "\t price:" + price + "0\t first class price: " + firstClassPrice + "0"
         }
