@@ -14,7 +14,7 @@ package Observer{
         private var pastFlights:  Array[Flight] = Array()
         private var flightsNumber: Int = 0
 
-        def flightTookPlaace(flight: Flight) : Unit = {
+        def flightTookPlace(flight: Flight) : Unit = {
             pastFlights = pastFlights :+ flight
             flightsNumber += 1
         }
