@@ -35,10 +35,6 @@ package Flight{
 
         def getFirstClassPrice(): Double = firstClassPrice
 
-        def isArriving(): Boolean  = (status == Status.Arriving)
-
-        def isLeaving(): Boolean  = (status == Status.Leaving)
-
         def getDate(): Date = date
 
         def getDelay(): Double = flightDelay
@@ -81,7 +77,7 @@ package Flight{
                 date = new Date(date.getTime() + delay)
                 flightDelay = delay.toDouble/(3600000)
             }
-            observer.flightTookPlaace(this)
+            observer.flightTookPlace(this)
         }
 
         def getFreePlacesNumber(): Int = freePlaces + freeBusinessPlaces
@@ -97,8 +93,6 @@ package Flight{
         def getDirection(): Direction.Direction = direction   
 
         def getProbability(): Double = changeTimeProb
-
-        def getStatus(): Status.Status = status
 
         def getId(): Int = id
 
@@ -133,7 +127,7 @@ package Flight{
             val direction = Direction(Random.nextInt(Direction.maxId))
             val inOut = Status(Random.nextInt(2))
             val price = (minPrice + Random.nextInt(priceBracket)).toDouble
-            
+
             new Flight(direction,inOut,places,data,probability,price, observer)
         }
         

@@ -16,6 +16,6 @@ object Sizes extends Enumeration {
 }
 object Status extends Enumeration{
         type Status = Value
-        val Leaving, Arriving, Staying, Left = Value
+        val Leaving, Arriving = Value
 }
 }
