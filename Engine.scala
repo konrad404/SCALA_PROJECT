@@ -13,10 +13,8 @@ class Engine(){
     private val flightGenerator = FlightGenerator(observer)
     private val customerGenerator = new CustomerGenerator(this)
     private var date = new Date()
-    
     private var flights : Array[Flight] = flightGenerator.generateTimetable(timetableLength)
     private var customers : List[Customer] = List()
-
 
     def getFlights():Array[Flight]={this.flights}
 
@@ -33,6 +31,7 @@ class Engine(){
             customer.bookFlight(null, null)
         val fileSchedule = new File("Schedule.txt" ) 
         val writer = new PrintWriter(fileSchedule)
+
         for(day <- 1 to days){
             newCustomers= customerGenerator.generateCustomers(500)
             customers = newCustomers ++ customers
@@ -49,11 +48,13 @@ class Engine(){
                 customer.randomEvent()
             writer.write("\nDay" + day + ":\n")
             writer.write(observer.getStatisticsFromDay(date))
-            println("\n")
+            writer.write("\n")
             Thread.sleep(1000)
 
         }
+
         writer.close()
+
         val endStatistics: String = observer.getEndStatisticsToDay(date)
         val fileObject = new File("EndStatistics.txt" ) 
         val printWriter = new PrintWriter(fileObject)

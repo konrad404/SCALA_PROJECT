@@ -20,8 +20,8 @@ package Flight{
         if(changeTimeProb > 1 || changeTimeProb < 0){
             throw new InvalidProbabilityException("wrong probability")
         }
-        val toAdd = 200
 
+        val toAdd = 200
         private val firstClassPrice : Double  = price + toAdd
         private var freePlaces = (places * 0.7).toInt
         private var freeBusinessPlaces = places - freePlaces 
@@ -32,10 +32,15 @@ package Flight{
         
 
         def getPrice(): Double = price
+
         def getFirstClassPrice(): Double = firstClassPrice
+
         def isArriving(): Boolean  = (status == Status.Arriving)
+
         def isLeaving(): Boolean  = (status == Status.Leaving)
+
         def getDate(): Date = date
+
         def getDelay(): Double = flightDelay
 
         def resPlaces(n: Int, isBusiness: Boolean): Unit ={
@@ -80,14 +85,23 @@ package Flight{
         }
 
         def getFreePlacesNumber(): Int = freePlaces + freeBusinessPlaces
+
         def getFreeEconomicPlacesNumber(): Int = freePlaces
+
         def getFreeBusinessPlacesNumber(): Int = freeBusinessPlaces
+
         def getCurrIncome(): Double = takenPlaces * price + takenBusinessPlaces * firstClassPrice
+
         def getTakenPlaces(): Int = takenPlaces + takenBusinessPlaces
-        def getDirection(): Direction.Direction = direction    
+
+        def getDirection(): Direction.Direction = direction   
+
         def getProbability(): Double = changeTimeProb
+
         def getStatus(): Status.Status = status
+
         def getId(): Int = id
+
         def getFillPercent(): Double = ((takenBusinessPlaces + takenPlaces).toDouble / places)
 
         override def toString() = {
@@ -119,6 +133,7 @@ package Flight{
             val direction = Direction(Random.nextInt(Direction.maxId))
             val inOut = Status(Random.nextInt(2))
             val price = (minPrice + Random.nextInt(priceBracket)).toDouble
+            
             new Flight(direction,inOut,places,data,probability,price, observer)
         }
         
