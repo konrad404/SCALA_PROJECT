@@ -23,3 +23,10 @@ executor.scala
 .metals/readonly/dependencies/scala-library-2.12.13-sources.jar/scala/collection/generic/FilterMonadic.scala
 .metals/readonly/dependencies/scala-library-2.12.13-sources.jar/scala/util/Random.scala
 .metals/readonly/scala/math/ScalaNumericConversions.scala
+.metals/readonly/dependencies/scala-library-2.12.14-sources.jar/scala/Unit.scala
+.metals/readonly/dependencies/scala-library-2.12.14-sources.jar/scala/collection/immutable/List.scala
+.metals/readonly/dependencies/scala-library-2.12.14-sources.jar/scala/util/Random.scala
+.metals/readonly/dependencies/scala-library-2.12.14-sources.jar/scala/Predef.scala
+.metals/readonly/dependencies/scala-library-2.12.14-sources.jar/scala/Int.scala
+Schedule.txt
+EndStatistics.txt
