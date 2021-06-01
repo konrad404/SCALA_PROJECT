@@ -23,8 +23,8 @@ package Flight{
 
         val toAdd = 200
         private val firstClassPrice : Double  = price + toAdd
-        private var freePlaces = (places * 0.7).toInt
-        private var freeBusinessPlaces = places - freePlaces 
+        private var freeEconomicPlaces = (places * 0.7).toInt
+        private var freeBusinessPlaces = places - freeEconomicPlaces 
         private var takenPlaces = 0
         private var takenBusinessPlaces = 0
         private var flightDelay: Double = 0.0
@@ -50,12 +50,12 @@ package Flight{
                 }
             }
             else {
-                if(n > freePlaces){
+                if(n > freeEconomicPlaces){
                     throw new IllegalArgumentException("There is not enough places")
                 }
                 else{
                     takenPlaces += n
-                    freePlaces -= n
+                    freeEconomicPlaces -= n
                 }
             }
         }
@@ -67,7 +67,7 @@ package Flight{
             }
             else{
                 takenPlaces-=n
-                freePlaces+=n
+                freeEconomicPlaces+=n
             }
         }
 
@@ -80,9 +80,9 @@ package Flight{
             observer.flightTookPlace(this)
         }
 
-        def getFreePlacesNumber(): Int = freePlaces + freeBusinessPlaces
+        def getFreePlacesNumber(): Int = freeEconomicPlaces + freeBusinessPlaces
 
-        def getFreeEconomicPlacesNumber(): Int = freePlaces
+        def getFreeEconomicPlacesNumber(): Int = freeEconomicPlaces
 
         def getFreeBusinessPlacesNumber(): Int = freeBusinessPlaces
 
@@ -99,7 +99,7 @@ package Flight{
         def getFillPercent(): Double = ((takenBusinessPlaces + takenPlaces).toDouble / places)
 
         override def toString() = {
-            "ID: " + id + "       \t Direction: " + direction + "\t date: " + date + "\t status: " + status + "\t places: " + places + " \t free: " + (freePlaces + freeBusinessPlaces) + "\t price:" + price + "0\t first class price: " + firstClassPrice + "0"
+            "ID: " + id + "       \t Direction: " + direction + "\t date: " + date + "\t status: " + status + "\t places: " + places + " \t free: " + (freeEconomicPlaces + freeBusinessPlaces) + "\t price:" + price + "0\t first class price: " + firstClassPrice + "0"
         }
 
         
