@@ -33,7 +33,7 @@ class Engine(){
         val writer = new PrintWriter(fileSchedule)
 
         for(day <- 1 to days){
-            newCustomers= customerGenerator.generateCustomers(500)
+            newCustomers= customerGenerator.generateCustomers(2000)
             customers = newCustomers ++ customers
             for(customer <- newCustomers)
                 customer.bookFlight(null, null)

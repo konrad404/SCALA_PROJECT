@@ -89,14 +89,14 @@ class Customer(private val name: String, private val countries: scala.collection
     def randomEvent():Unit={
         //postponing a flight event
         if(bookedFlights.size > 0){
-            if(Random.nextInt(100) % 25 == 0){
+            if(Random.nextInt(100) % 49 == 0){
                 flightPostponement(bookedFlights(Random.nextInt(bookedFlights.size)))
             }
             //buy additional tickets event
             if(Random.nextInt(100) % 25 == 0){
                 buyAdditionalTicket(bookedFlights(Random.nextInt(bookedFlights.size)), Random.nextInt(10))
             }
-            if(Random.nextInt(100) % 30 == 0){
+            if(Random.nextInt(100) % 99 == 0){
                 cancelFlight(bookedFlights(Random.nextInt(bookedFlights.size)))
             }
         }

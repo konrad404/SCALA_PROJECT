@@ -25,7 +25,7 @@ package Flight{
         private val firstClassPrice : Double  = price + toAdd
         private var freeEconomicPlaces = (places * 0.7).toInt
         private var freeBusinessPlaces = places - freeEconomicPlaces 
-        private var takenPlaces = 0
+        private var takenEconomicPlaces = 0
         private var takenBusinessPlaces = 0
         private var flightDelay: Double = 0.0
         private val id = Flight.getNewId()
@@ -54,7 +54,7 @@ package Flight{
                     throw new IllegalArgumentException("There is not enough places")
                 }
                 else{
-                    takenPlaces += n
+                    takenEconomicPlaces += n
                     freeEconomicPlaces -= n
                 }
             }
@@ -66,7 +66,7 @@ package Flight{
                 freeBusinessPlaces+=n
             }
             else{
-                takenPlaces-=n
+                takenEconomicPlaces-=n
                 freeEconomicPlaces+=n
             }
         }
@@ -86,9 +86,9 @@ package Flight{
 
         def getFreeBusinessPlacesNumber(): Int = freeBusinessPlaces
 
-        def getCurrIncome(): Double = takenPlaces * price + takenBusinessPlaces * firstClassPrice
+        def getCurrIncome(): Double = takenEconomicPlaces * price + takenBusinessPlaces * firstClassPrice
 
-        def getTakenPlaces(): Int = takenPlaces + takenBusinessPlaces
+        def getTakenPlaces(): Int = takenEconomicPlaces + takenBusinessPlaces
 
         def getDirection(): Direction.Direction = direction   
 
@@ -96,7 +96,7 @@ package Flight{
 
         def getId(): Int = id
 
-        def getFillPercent(): Double = ((takenBusinessPlaces + takenPlaces).toDouble / places)
+        def getFillPercent(): Double = ((takenBusinessPlaces + takenEconomicPlaces).toDouble / places)
 
         override def toString() = {
             "ID: " + id + "       \t Direction: " + direction + "\t date: " + date + "\t status: " + status + "\t places: " + places + " \t free: " + (freeEconomicPlaces + freeBusinessPlaces) + "\t price:" + price + "0\t first class price: " + firstClassPrice + "0"
