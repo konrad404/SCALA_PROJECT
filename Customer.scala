@@ -71,8 +71,11 @@ class Customer(private val name: String, private val countries: scala.collection
         numberOfCustomers += amount
 
         if(flight.getDate().after(engine.getDate()) && ((isBusiness && flight.getFreeBusinessPlacesNumber() >= amount)
-            || (!isBusiness && flight.getFreeEconomicPlacesNumber() >= amount)))
-            engine.reservePlaces(flightId, amount, isBusiness)
+            || (!isBusiness && flight.getFreeEconomicPlacesNumber() >= amount))){
+                println(flight.getFreeBusinessPlacesNumber() + " " + flight.getFreeEconomicPlacesNumber())
+                println("IsBussines:" + isBusiness + " amount: " + amount)
+                engine.reservePlaces(flightId, amount, isBusiness)
+            }
     }
 
     def cancelFlight(flightId: Int):Unit={
