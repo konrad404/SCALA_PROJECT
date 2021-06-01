@@ -60,26 +60,32 @@ class Customer(private val name: String, private val countries: scala.collection
         }
     }
 
-    def buyAdditionalTicket(flight: Flight, amount: Int):Unit={      
-        if(flight.getDate().after(engine.getDate()) && ((isBusiness && flight.getFreeBusinessPlacesNumber() >= amount)
-            || (!isBusiness && flight.getFreeEconomicPlacesNumber() >= amount))){
-                engine.reservePlaces(flight.getId(), amount, isBusiness)
+    def buyAdditionalTicket(flight: Flight, amount: Int):Unit={    
+        if(flight.getDate().after(engine.getDate())){  
+            if(flight.getDate().after(engine.getDate()) && ((isBusiness && flight.getFreeBusinessPlacesNumber() >= amount)
+                || (!isBusiness && flight.getFreeEconomicPlacesNumber() >= amount))){
+                    engine.reservePlaces(flight.getId(), amount, isBusiness)
+            }
         }
     }
 
     def cancelFlight(flight: Flight):Unit={
-        var id = flight.getId()
-        var list_id = -1
-        for(i <- 0 until bookedFlights.size if bookedFlights(i).getId() == id)
-            list_id = i
-        bookedFlights.drop(list_id)
+        if(flight.getDate().after(engine.getDate())){
+            var id = flight.getId()
+            var list_id = -1
+            for(i <- 0 until bookedFlights.size if bookedFlights(i).getId() == id)
+                list_id = i
+            bookedFlights.drop(list_id)
 
-        engine.deleteReservedPlaces(flight.getId(), numberOfCustomers, isBusiness)
+            engine.deleteReservedPlaces(flight.getId(), numberOfCustomers, isBusiness)
+        }
     }
 
     def flightPostponement(flight: Flight):Unit={
-        cancelFlight(flight)
-        bookFlight(flight.getDirection(), flight.getDate())
+        if(flight.getDate().after(engine.getDate())){
+            cancelFlight(flight)
+            bookFlight(flight.getDirection(), flight.getDate())
+        }
     }
 
     override def toString():String={
