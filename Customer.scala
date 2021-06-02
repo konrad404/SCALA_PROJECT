@@ -45,15 +45,10 @@ class Customer(private val name: String, private val countries: scala.collection
             flights = flights.filter(f => (f.getFreeEconomicPlacesNumber() >= numberOfCustomers &&
                                              priceRange(0) <= f.getPrice() && priceRange(1) >= f.getPrice()))
         }
-                              
-        //println("===============================================================================\n [FILTERED FLIGHTS]")
-        //for(f <- flights)
-        //    println(f.toString())
         
         if(flights.size > 0){
             val selectedFlight = flights(Random.nextInt(flights.size))
-            //println("===============================================================================\n [SELECTED FLIGHT]")
-            ///println(selectedFlight.toString())
+            
             bookedFlights = selectedFlight :: bookedFlights
         
             engine.reservePlaces(selectedFlight.getId(), numberOfCustomers, isBusiness)
